@@ -3,6 +3,7 @@
 
 ## Dependencies
 * Django
+* Python 3.7
 
 ## Download
 
