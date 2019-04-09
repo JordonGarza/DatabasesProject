@@ -2,8 +2,15 @@
 
 
 ## Dependencies
+* Python 3
 * Django
-* Python 3.7
+* mysqlclient (python module)
+
+Installing dependencies in terminal:
+```
+easy_install django
+pip install mysqlclient
+```
 
 ## Download
 
@@ -11,4 +18,9 @@
 git clone https://github.com/JordonGarza/DatabasesProject.git
 ```
 
-## Run 
+## Run
+In terminal:
+```
+python manage.py runserver
+```
+
