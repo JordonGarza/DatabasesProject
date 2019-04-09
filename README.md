@@ -1,5 +1,9 @@
 # DatabasesProject
 
+
+## Dependencies
+* Django
+
 ## Download
 
 ```
