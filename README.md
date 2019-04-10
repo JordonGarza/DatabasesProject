@@ -2,10 +2,11 @@
 
 
 ## Dependencies
-* Python 3
+* Python 3.7
 * Django
 * mysqlclient (python module)
 
+### Linux or Windows
 Installing dependencies in terminal:
 ```
 easy_install django
