@@ -6,9 +6,18 @@
 * Django
 * mysqlclient (python module)
 
-### Linux or Windows
+### Linux (Ubuntu)
+Set up virtual enviroment:
+```
+sudo apt-get install python3.7
+virtualenv -p python3.7 venv3.7
+source venv3.7/bin/activate # enter virtual enviroment
+deactivate # exit virtual enviroment
+```
+
 Installing dependencies in terminal:
 ```
+sudo apt-get install python3.7-dev
 easy_install django
 pip install mysqlclient
 ```
