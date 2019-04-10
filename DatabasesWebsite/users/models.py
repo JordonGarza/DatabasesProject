@@ -7,7 +7,7 @@ from django.db import models
 
 class CustomUser(AbstractUser):
     # add additional fields in here
-
+    REQUIRED_FIELDS = ['first_name','last_name']
     def __str__(self):
         return self.username
     
