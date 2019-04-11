@@ -21,6 +21,9 @@ class Book(models.Model):
     class Meta:
         managed = False
         db_table = 'Book'
+        
+    def __str__(self):
+        return self.title
 
 
 class Bookcopy(models.Model):
@@ -126,6 +129,9 @@ class Movie(models.Model):
         managed = False
         db_table = 'Movie'
 
+    def __str__(self):
+        return self.title
+
 
 class Moviecopy(models.Model):
     itemid = models.ForeignKey(Item, models.DO_NOTHING, db_column='ItemID', primary_key=True)  # Field name made lowercase.
@@ -166,6 +172,9 @@ class Sheetmusic(models.Model):
     class Meta:
         managed = False
         db_table = 'SheetMusic'
+
+    def __str__(self):
+        return self.title
 
 
 class User(models.Model):
