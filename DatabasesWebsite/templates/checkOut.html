@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load auth_extras %}
+
+{% block title %}Check Out{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+ 
+ 
+  {% if request.user|has_group:"LIBRARIAN" %}
+	<p> User belongs to Librarian </p>
+	
+	<form method="post"> 
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button type="submit">Check-Out!</button>
+    </form>
+  {% else %}
+	<p>You are not logged in as a Librarian</p>
+    <a href="{% url 'home' %}">Home</a>
+  {% endif %}
+  
+   <p><a href="{% url 'logout' %}">logout</a></p>
+   
+{% else %}
+  <p>You are not logged in as a Librarian</p>
+  <a href="{% url 'home' %}">Home</a>
+{% endif %}
+{% endblock %}
