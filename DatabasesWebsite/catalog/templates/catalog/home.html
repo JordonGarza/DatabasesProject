@@ -1,14 +1,14 @@
 {% extends "catalog/base.html" %}
 {% block content %}
+
+
+
 <form action="{% url 'catalog_index' %}" method="get">
-    <label for="search_for">Search for:</label>
-    <select name="search_for">
-        <option value="Books" />Books</option>
-        <option value="Movies" />Movies</option>
-        <option value="Music" />Music</option>
-    </select>   <!-- ADDED THIS LINE -->
-    <input type="submit" value="Filter" />   <!-- DELETE name="featured" FROM ORIGINAL CODE -->  
+    {{ form }}
+    <input type="submit" value="Submit" />
 </form>
+
+
 	{% for book in books %}
 		<h1>{{book.title}}</h1>
 		<p>By {{book.author}}</p>
@@ -19,9 +19,9 @@
 		<p>Director: {{movie.director}}</p>
 		<p>Rating: {{movie.rating}}</p>
 	{% endfor %}
-	{% for music in musics %}
-		<h1>{{music.title}}</h1>
-		<p>Composer: {{music.composer}}</p>
-		<p>Genre: {{music.genre}}</p>
+	{% for m in music %}
+		<h1>{{m.title}}</h1>
+		<p>Composer: {{m.composer}}</p>
+		<p>Genre: {{m.genre}}</p>
 	{% endfor %}
 {% endblock content %}
