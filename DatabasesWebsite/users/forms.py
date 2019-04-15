@@ -5,6 +5,7 @@ from django.contrib.auth.models import Group
 from .models import CustomUser
 from .models import Checkout
 from .models import Checkin
+from .models import Finetransactions
 from django.forms import ModelForm
 
 class CustomUserCreationForm(UserCreationForm):
@@ -40,5 +41,10 @@ class SignIn(ModelForm):
     class Meta:
         model = Checkin
         fields = ('userid', 'itemid', 'datecheckedin')
+
+class pay(ModelForm):
+    class Meta:
+        model = Finetransactions
+        fields = ('amount',)
 
 
