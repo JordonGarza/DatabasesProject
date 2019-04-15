@@ -49,10 +49,3 @@ def add_checkIn(request):
             form = SignIn()
  
             return render(request, "checkIn.html", {'form': form})
-
-#See link for use of login_required decorator
-# https://docs.djangoproject.com/en/2.2/topics/auth/default/    
-@login_required(login_url="../login/")
-def seeAccount(request):
-    #function redirects user to webpage for patrons (non-admin) users
-    return render(request, 'account.html')

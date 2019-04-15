@@ -12,6 +12,8 @@ from users.models import Holds
 from users.models import UsersCustomuser
 from users.models import Item
 
+from django.contrib.auth.decorators import login_required
+
 
 def index(request):
 	search_for_filter = 'All'
@@ -167,4 +169,12 @@ def index(request):
 	return render(request, 'catalog/home.html', context)
 
 
-	
+#See link for use of login_required decorator
+# https://docs.djangoproject.com/en/2.2/topics/auth/default/    
+@login_required(login_url="../login/")
+def seeAccount(request):
+    #function redirects user to webpage for patrons (non-admin) users
+    holds = Holds.objects.all()
+    books = Book.objects.all()
+    context = {'holds': holds, 'books':books}
+    return render(request, 'catalog/account.html',context)

@@ -1,0 +1,28 @@
+{% extends "catalog/base.html" %}
+{% block content %}
+
+<div class = "form">
+<div class = "content-section">
+<h2> Books </h2>
+	{% for book in books %}
+		<article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" >{{ book.author }}</a>
+              <small class="text-muted">ISBN-13: {{ book.isbn }}</small>
+            </div>
+            <h2><a class="article-title" >{{ book.title }}</a></h2>
+            <img src="../media/{{ book.cover_image }}" height="150" width="100" align="middle">
+          </div>
+		</article>
+		
+	{% endfor %}
+	
+</div>
+<div class = "content-section">
+<h2> Holds</h2>
+	
+</div>
+</div>
+
+{% endblock content%}
