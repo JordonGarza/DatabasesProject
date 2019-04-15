@@ -53,6 +53,6 @@ def add_checkIn(request):
 #See link for use of login_required decorator
 # https://docs.djangoproject.com/en/2.2/topics/auth/default/    
 @login_required(login_url="../login/")
-def loginPatron(request):
+def seeAccount(request):
     #function redirects user to webpage for patrons (non-admin) users
-    return render(request, 'patron.html')
+    return render(request, 'account.html')

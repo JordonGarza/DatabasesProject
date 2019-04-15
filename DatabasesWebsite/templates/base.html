@@ -41,6 +41,7 @@
             {% if user.is_authenticated %}
               <div class="navbar-nav">
                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+               <a class="nav-item nav-link" href="{% url 'account' %}">View Account</a>
               </div>
             {% endif %}
           </div>
