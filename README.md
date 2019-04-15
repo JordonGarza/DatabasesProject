@@ -5,6 +5,7 @@
 * Python 3.7
 * Django
 * mysqlclient (python module)
+* Pillow (python module)
 
 ### Linux (Ubuntu)
 Set up virtual enviroment:
@@ -20,6 +21,7 @@ Installing dependencies in terminal:
 sudo apt-get install python3.7-dev
 easy_install django
 pip install mysqlclient
+pip install Pillow
 ```
 
 ## Download
