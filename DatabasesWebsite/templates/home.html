@@ -9,9 +9,14 @@
   Hi {{ user.username }}!
   
   {% if request.user|has_group:"ADMIN" %}
-	<p> User belongs to Developer </p>
-  {% else %}
-	<p> User does not belong to Developer </p>
+  <p> User belongs to Admin </p>
+  <a href="{% url 'admin:index' %}">Admin Site</a>
+  {% endif %}
+  
+  {% if request.user|has_group:"LIBRARIAN" %}
+  <p> User belongs to Librarian </p>
+  <a href="{% url 'add_model' %}">Check-Out Item</a>
+  <a href="{% url 'add_checkIn' %}">Check-In Item</a>
   {% endif %}
   
   
