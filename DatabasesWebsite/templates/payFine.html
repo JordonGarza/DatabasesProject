@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load auth_extras %}
+
+{% block title %}Check In{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+ 
+	
+	<form method="post"> 
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button type="submit">Pay Fine!</button>
+    </form>
+
+   <p><a href="{% url 'logout' %}">logout</a></p>
+   
+{% else %}
+  <p>You are not logged in as a Librarian</p>
+  <a href="{% url 'home' %}">Home</a>
+{% endif %}
+{% endblock %}
