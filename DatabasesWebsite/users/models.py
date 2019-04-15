@@ -95,7 +95,7 @@ class Finesrecord(models.Model):
 class Holds(models.Model):
     itemid = models.ForeignKey('Item', models.DO_NOTHING, db_column='ItemID', blank=True, null=True)  # Field name made lowercase.
     userid = models.ForeignKey('UsersCustomuser', models.DO_NOTHING, db_column='userID', blank=True, null=True)  # Field name made lowercase.
-    holddate = models.DateField(db_column='HoldDate', blank=True, null=True)  # Field name made lowercase.
+    holddate = models.DateField(db_column='HoldDate', blank=True, null=True, auto_now_add=True)  # Field name made lowercase.
     helduntildate = models.DateField(db_column='HeldUntilDate', blank=True, null=True)  # Field name made lowercase.
     heldtransactionid = models.AutoField(db_column='HeldTransactionID', primary_key=True)  # Field name made lowercase.
 
