@@ -17,11 +17,15 @@ class Book(models.Model):
     genre = models.CharField(db_column='Genre', max_length=8, blank=True, null=True)  # Field name made lowercase.
     copies = models.IntegerField(db_column='Copies')  # Field name made lowercase.
     activecopies = models.IntegerField(db_column='ActiveCopies')  # Field name made lowercase.
-    coverimage = models.TextField(db_column='CoverImage', blank=True, null=True)  # Field name made lowercase.
+    cover_image = models.ImageField(db_column='CoverImage', blank = True, null =True, default="covers/book_default.png", upload_to="covers/")
 
     class Meta:
         managed = False
         db_table = 'Book'
+     
+    
+    def __str__(self):
+        return self.title
 
 
 class Bookcopy(models.Model):
@@ -126,12 +130,13 @@ class Movie(models.Model):
     genre = models.CharField(db_column='Genre', max_length=15, blank=True, null=True)  # Field name made lowercase.
     copies = models.IntegerField(db_column='Copies')  # Field name made lowercase.
     activecopies = models.IntegerField(db_column='ActiveCopies')  # Field name made lowercase.
-    coverimage = models.TextField(db_column='CoverImage', blank=True, null=True)  # Field name made lowercase.
+    cover_image = models.ImageField(db_column='CoverImage', blank = True, default="covers/movie_default.png", null =True, upload_to="covers/")
 
     class Meta:
         managed = False
         db_table = 'Movie'
-
+    def __str__(self):
+        return self.title
 
 class Moviecopy(models.Model):
     itemid = models.ForeignKey(Item, models.DO_NOTHING, db_column='ItemID', primary_key=True)  # Field name made lowercase.
@@ -171,11 +176,14 @@ class Sheetmusic(models.Model):
     genre = models.CharField(db_column='Genre', max_length=15, blank=True, null=True)  # Field name made lowercase.
     copies = models.IntegerField(db_column='Copies')  # Field name made lowercase.
     activecopies = models.IntegerField(db_column='ActiveCopies')  # Field name made lowercase.
-    coverimage = models.TextField(db_column='CoverImage', blank=True, null=True)  # Field name made lowercase.
+    cover_image = models.ImageField(db_column='CoverImage', blank = True, null =True, default="covers/music_default.png", upload_to="covers/")
 
     class Meta:
         managed = False
         db_table = 'SheetMusic'
+       
+    def __str__(self):
+        return self.title
 
 
 class User(models.Model):
