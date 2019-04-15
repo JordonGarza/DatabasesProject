@@ -55,4 +55,4 @@ def add_checkIn(request):
 @login_required(login_url="../login/")
 def loginPatron(request):
     #function redirects user to webpage for patrons (non-admin) users
-	return render(request, 'patron.html')
+    return render(request, 'patron.html')

@@ -40,3 +40,5 @@ class SignIn(ModelForm):
     class Meta:
         model = Checkin
         fields = ('userid', 'itemid', 'datecheckedin')
+
+
