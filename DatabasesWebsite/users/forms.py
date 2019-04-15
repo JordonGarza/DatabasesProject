@@ -42,4 +42,3 @@ class SignIn(ModelForm):
         fields = ('userid', 'itemid', 'datecheckedin')
 
 
-

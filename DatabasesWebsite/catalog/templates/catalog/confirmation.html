@@ -1,0 +1,48 @@
+{% extends "catalog/base.html" %}
+{% block content %}
+
+
+<article class="media search-bar-section">
+<div class="media-body">
+		<h3>Success!</h3>
+		<p>Your item will be held for 7 days.</p>
+		<p>Please bring your library card to the front desk to pick up your item </p>
+
+		{% if type == 1 %}
+		<div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" >{{ book.author }}</a>
+              <small class="text-muted">ISBN-13: {{ book.isbn }}</small>
+            </div>
+            <h2><a class="article-title" >{{ book.title }}</a></h2>
+            <img src="media/{{ book.cover_image }}" height="150" width="100" align="middle">
+        </div> </div>
+        {% endif %}
+
+        {% if type == 2 %}
+		<div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" >{{ movie.director }}</a>
+              <small class="text-muted">ISAN: {{ movie.isan }}</small>
+            </div>
+            <h2><a class="article-title" >{{ movie.title }}</a></h2>
+            <img src="media/{{ movie.cover_image }}" height="150" width="100" align="middle">
+        </div> </div>
+        {% endif %}
+
+        {% if type == 3 %}
+		<div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" >{{ music.composer }}</a>
+              <small class="text-muted">ISMN: {{ music.ismn }}</small>
+            </div>
+            <h2><a class="article-title" >{{ music.title }}</a></h2>
+            <img src="media/{{ music.cover_image }}" height="150" width="100" align="middle">
+        </div> </div>
+        {% endif %}
+
+</div>
+</article>
+
+
+{% endblock content %}
