@@ -4,36 +4,31 @@ from django.db import models
 
 
 
-
-
 class CustomUser(AbstractUser):
     # add additional fields in here
     REQUIRED_FIELDS = ['first_name','last_name']
     def __str__(self):
         return self.username
-    
+
 class Book(models.Model):
     isbn = models.CharField(db_column='ISBN', primary_key=True, max_length=13)  # Field name made lowercase.
     title = models.CharField(db_column='Title', max_length=30, blank=True, null=True)  # Field name made lowercase.
     author = models.CharField(db_column='Author', max_length=30, blank=True, null=True)  # Field name made lowercase.
     genre = models.CharField(db_column='Genre', max_length=8, blank=True, null=True)  # Field name made lowercase.
     copies = models.IntegerField(db_column='Copies')  # Field name made lowercase.
-    activecopies = models.IntegerField(db_column='ActiveCopies')
-    cover_image = models.ImageField(db_column='CoverImage', blank = True, null =True, default="covers/book_default.png", upload_to="covers/")
+    activecopies = models.IntegerField(db_column='ActiveCopies')  # Field name made lowercase.
+    coverimage = models.TextField(db_column='CoverImage', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'Book'
-        
-    def __str__(self):
-        return self.title
 
 
 class Bookcopy(models.Model):
     itemid = models.ForeignKey('Item', models.DO_NOTHING, db_column='ItemID', primary_key=True)  # Field name made lowercase.
     isbn = models.ForeignKey(Book, models.DO_NOTHING, db_column='ISBN', blank=True, null=True)  # Field name made lowercase.
     checkedout = models.IntegerField(db_column='CheckedOut')  # Field name made lowercase.
-    isheld = models.IntegerField(db_column='IsHeld')
+    isheld = models.IntegerField(db_column='IsHeld')  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -51,7 +46,7 @@ class Checkin(models.Model):
 
 
 class Checkout(models.Model):
-    transactionid = models.IntegerField(db_column='TransactionID', primary_key=True)  # Field name made lowercase.
+    transactionid = models.AutoField(db_column='TransactionID', primary_key=True)  # Field name made lowercase.
     userid = models.ForeignKey('UsersCustomuser', models.DO_NOTHING, db_column='userID')  # Field name made lowercase.
     itemid = models.ForeignKey('Item', models.DO_NOTHING, db_column='itemID')  # Field name made lowercase.
     checkoutdate = models.DateField(db_column='CheckOutDate')  # Field name made lowercase.
@@ -76,7 +71,8 @@ class Finetransactions(models.Model):
     transtype = models.CharField(db_column='TransType', max_length=7)  # Field name made lowercase.
     transactiondate = models.DateField(db_column='TransactionDate')  # Field name made lowercase.
     amount = models.DecimalField(db_column='Amount', max_digits=4, decimal_places=2)  # Field name made lowercase.
-    transid = models.ForeignKey(Checkout, models.DO_NOTHING, db_column='TransID')  # Field name made lowercase.
+    checkoutid = models.ForeignKey(Checkout, models.DO_NOTHING, db_column='CheckOutID', blank=True, null=True)  # Field name made lowercase.
+    transactionid = models.AutoField(db_column='TransactionID', primary_key=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -95,8 +91,9 @@ class Finesrecord(models.Model):
 class Holds(models.Model):
     itemid = models.ForeignKey('Item', models.DO_NOTHING, db_column='ItemID', blank=True, null=True)  # Field name made lowercase.
     userid = models.ForeignKey('UsersCustomuser', models.DO_NOTHING, db_column='userID', blank=True, null=True)  # Field name made lowercase.
-    holddate = models.DateField(db_column='HoldDate', blank=True, null=True, auto_now_add=True)  # Field name made lowercase.
-    helduntildate = models.DateField(db_column='HeldUntilDate', blank=True, null=True,)  # Field name made lowercase.
+    holddate = models.DateField(db_column='HoldDate', blank=True, null=True)  # Field name made lowercase.
+    helduntildate = models.DateField(db_column='HeldUntilDate', blank=True, null=True)  # Field name made lowercase.
+    heldtransactionid = models.AutoField(db_column='HeldTransactionID', primary_key=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -105,7 +102,7 @@ class Holds(models.Model):
 
 class Item(models.Model):
     itemid = models.IntegerField(db_column='itemID', primary_key=True)  # Field name made lowercase.
-    itemtype = models.CharField(db_column='ItemType', max_length=5, blank=True, null=True)  # Field name made lowercase.
+    itemtype = models.CharField(db_column='ItemType', max_length=5)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -128,22 +125,19 @@ class Movie(models.Model):
     rating = models.CharField(db_column='Rating', max_length=5, blank=True, null=True)  # Field name made lowercase.
     genre = models.CharField(db_column='Genre', max_length=15, blank=True, null=True)  # Field name made lowercase.
     copies = models.IntegerField(db_column='Copies')  # Field name made lowercase.
-    activecopies = models.IntegerField(db_column='ActiveCopies')
-    cover_image = models.ImageField(db_column='CoverImage', blank = True, default="covers/movie_default.png", null =True, upload_to="covers/")
+    activecopies = models.IntegerField(db_column='ActiveCopies')  # Field name made lowercase.
+    coverimage = models.TextField(db_column='CoverImage', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'Movie'
-
-    def __str__(self):
-        return self.title
 
 
 class Moviecopy(models.Model):
     itemid = models.ForeignKey(Item, models.DO_NOTHING, db_column='ItemID', primary_key=True)  # Field name made lowercase.
     isan = models.ForeignKey(Movie, models.DO_NOTHING, db_column='ISAN', blank=True, null=True)  # Field name made lowercase.
     checkedout = models.IntegerField(db_column='CheckedOut')  # Field name made lowercase.
-    isheld = models.IntegerField(db_column='IsHeld')
+    isheld = models.IntegerField(db_column='IsHeld')  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -154,7 +148,7 @@ class Musiccopy(models.Model):
     itemid = models.ForeignKey(Item, models.DO_NOTHING, db_column='ItemID', primary_key=True)  # Field name made lowercase.
     ismn = models.ForeignKey('Sheetmusic', models.DO_NOTHING, db_column='ISMN', blank=True, null=True)  # Field name made lowercase.
     checkedout = models.IntegerField(db_column='CheckedOut')  # Field name made lowercase.
-    isheld = models.IntegerField(db_column='IsHeld')
+    isheld = models.IntegerField(db_column='IsHeld')  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -176,15 +170,12 @@ class Sheetmusic(models.Model):
     composer = models.CharField(db_column='Composer', max_length=25, blank=True, null=True)  # Field name made lowercase.
     genre = models.CharField(db_column='Genre', max_length=15, blank=True, null=True)  # Field name made lowercase.
     copies = models.IntegerField(db_column='Copies')  # Field name made lowercase.
-    activecopies = models.IntegerField(db_column='ActiveCopies')
-    cover_image = models.ImageField(db_column='CoverImage', blank = True, null =True, default="covers/music_default.png", upload_to="covers/")
+    activecopies = models.IntegerField(db_column='ActiveCopies')  # Field name made lowercase.
+    coverimage = models.TextField(db_column='CoverImage', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'SheetMusic'
-
-    def __str__(self):
-        return self.title
 
 
 class User(models.Model):
@@ -203,7 +194,7 @@ class User(models.Model):
 
 
 class AuthGroup(models.Model):
-    name = models.CharField(unique=True, max_length=80)
+    name = models.CharField(unique=True, max_length=150)
 
     class Meta:
         managed = False
