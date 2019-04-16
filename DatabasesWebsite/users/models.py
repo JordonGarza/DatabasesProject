@@ -25,7 +25,7 @@ class Book(models.Model):
      
     
     def __str__(self):
-        return self.title
+        return self.isbn
 
 
 class Bookcopy(models.Model):

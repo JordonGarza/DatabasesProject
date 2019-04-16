@@ -12,7 +12,7 @@ from .forms import pay
 from .models import CustomUser
 from .models import UsersCustomuser
 from .models import Finetransactions
-from .models import Holds
+from .models import Currentholds
 from .models import Book
 from .models import Bookcopy
 from .models import Checkout
@@ -93,7 +93,7 @@ def report(request):
 def seeAccount(request):
     #function redirects user to webpage for patrons (non-admin) users
     user_id = request.user.id
-    holds = Holds.objects.filter(userid=user_id) 
+    holds = Currentholds.objects.filter(userid=user_id) 
     checkouts = Checkout.objects.filter(userid=user_id)
     for h in holds:
         print((holds.itemid).itemid)
