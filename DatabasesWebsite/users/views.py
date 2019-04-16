@@ -12,6 +12,10 @@ from .forms import pay
 from .models import CustomUser
 from .models import UsersCustomuser
 from .models import Finetransactions
+from .models import Holds
+from .models import Book
+from .models import Bookcopy
+from .models import Checkout
 from django.views.generic.edit import FormView
 import datetime
 
@@ -70,3 +74,17 @@ def pay_Fine(request):
  
             return render(request, "payFine.html", {'form': form})
 
+
+#See link for use of login_required decorator
+# https://docs.djangoproject.com/en/2.2/topics/auth/default/    
+@login_required(login_url="../login/")
+def seeAccount(request):
+    #function redirects user to webpage for patrons (non-admin) users
+    user_id = request.user.id
+    holds = Holds.objects.filter(userid=user_id) 
+    checkouts = Checkout.objects.filter(userid=user_id)
+    
+
+
+    context = {'holds': holds, 'checkout':checkouts}
+    return render(request, 'account.html',context)

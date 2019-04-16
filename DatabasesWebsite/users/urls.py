@@ -10,4 +10,5 @@ urlpatterns = [
     path('checkOut/', views.add_model, name='add_model'),
     path('checkIn/', views.add_checkIn, name='add_checkIn'),
     path('PayFine/', views.pay_Fine, name='pay_Fine'),
+    path('account/', views.seeAccount, name='account'),
 ]
