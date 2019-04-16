@@ -25,15 +25,27 @@
 <div class = "account-box">
 <h2>Holds</h2>
   
-{% for h in holds %}
+{% for b in books %}
 		<article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
-              <a class="mr-2" >{{ h.itemid }}</a>
-              <small class="text-muted">ISBN-13: </small>
+              <a class="mr-2" >{{ b.author }}</a>
+              <small class="text-muted">ISBN-13: {{ b.isbn }}</small>
             </div>
-            <h3><a class="article-title" >   </a></h3>
-        </div>
+            <h3><a class="article-title" >{{ b.title }}</a></h3>
+            <img class="book-img" img src="{{ b.cover.url }}" </div>
+    </article>
+{% endfor %}
+
+{% for m in movies %}
+    <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" >{{ m.director }}</a>
+              <small class="text-muted">ISAN: {{ m.isan }}</small>
+            </div>
+            <h3><a class="article-title" >{{ m.title }}</a></h3>
+            <img class="book-img" img src="{{ m.cover.url }}" </div>
     </article>
 {% endfor %}
 

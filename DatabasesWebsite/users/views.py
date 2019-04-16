@@ -14,7 +14,11 @@ from .models import UsersCustomuser
 from .models import Finetransactions
 from .models import Currentholds
 from .models import Book
+from .models import Movie
+from .models import Sheetmusic
 from .models import Bookcopy
+from .models import Moviecopy
+from .models import Musiccopy
 from .models import Checkout
 from django.views.generic.edit import FormView
 import datetime
@@ -112,10 +116,31 @@ def seeAccount(request):
     user_id = request.user.id
     holds = Currentholds.objects.filter(userid=user_id) 
     checkouts = Checkout.objects.filter(userid=user_id)
+    temp_books = []
+    temp_movie = []
+    temp_music = []
     for h in holds:
-        print((holds.itemid).itemid)
+        item_id = getattr(h, 'itemid')
+        actual_id = item_id.itemid
+        actual_type = item_id.itemtype
+        if actual_type == 'BOOK':
+            book_copy_obj = Bookcopy.objects.get(itemid=actual_id)
+            actual_isbn = getattr(book_copy_obj, 'isbn')
+            book = Book.objects.get(isbn=actual_isbn)
+            title = getattr(book, 'title')
+            author = getattr(book, 'author')
+            cover = getattr(book, 'cover_image')
+            book_to_add = {'title':title, 'author':author, 'isbn':actual_isbn, 'cover':cover}
+            temp_books.append(book_to_add)
+
+        elif actual_type == "MOVIE":
+            print('placeholder')
+        elif actualtype == 'MUSIC':
+            music_copy_obj = Musiccopy.objects.get(itemid=actual_id)
+       
+
     
 
 
-    context = {'holds': holds, 'checkout':checkouts}
+    context = {'holds': holds, 'checkout':checkouts, 'books': temp_books}
     return render(request, 'account.html',context)
