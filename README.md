@@ -6,6 +6,8 @@
 * Django
 * mysqlclient (python module)
 * Pillow (python module)
+* django-storages
+* boto3
 
 ### Linux (Ubuntu)
 Set up virtual enviroment:
@@ -22,6 +24,8 @@ sudo apt-get install python3.7-dev
 easy_install django
 pip install mysqlclient
 pip install Pillow
+pip install boto3
+pip install django-storages
 ```
 
 ## Download
