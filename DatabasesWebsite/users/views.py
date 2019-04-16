@@ -79,6 +79,13 @@ def pay_Fine(request):
                         'form': form
                       }
             return render(request, "payFine.html", context=context)
+        
+def report(request):
+        if request.method == "POST":
+             user_id = request.user.id
+        else:
+
+             return render(request, "reports.html")
 
 #See link for use of login_required decorator
 # https://docs.djangoproject.com/en/2.2/topics/auth/default/    
