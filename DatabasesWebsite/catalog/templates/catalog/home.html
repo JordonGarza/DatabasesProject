@@ -22,13 +22,15 @@
             {% if book.activecopies > 0 %}
             <font size="2" class= "available" color="green">Available</font> 
             
+             {% if user.is_authenticated %}
             <form action="{% url 'catalog_index' %}" method="get" > <input type="hidden" name="hold_isbn" value={{book.isbn}}> <input type="submit" class = "hold-button" value="Hold" />
-      </form>
+      </form>{% endif %}
 
       {% else %}
-       <font size="2" class = "available" color="red">Not Available</font>
 
-       <button class="hold-button" type="button" disabled>Hold</button> 
+       <font size="2" class = "available" color="red">Not Available</font>
+       {% if user.is_authenticated %}
+       <button class="hold-button" type="button" disabled>Hold</button> {% endif %}
       {% endif %}
 
             <img class="book-img" img src="media/{{ book.cover_image }}" </div>
@@ -54,13 +56,15 @@
             {% if movie.activecopies > 0 %}
             <font size="2" class= "available" color="green">Available</font> 
             
+             {% if user.is_authenticated %}
             <form action="{% url 'catalog_index' %}" method="get" > <input type="hidden" name="hold_isan" value={{movie.isan}}> <input type="submit" class = "hold-button" value="Hold" />
-      </form>
+      </form>{% endif %}
 
       {% else %}
-       <font size="2" class = "available" color="red">Not Available</font>
 
-       <button class="hold-button" type="button" disabled>Hold</button> 
+       <font size="2" class = "available" color="red">Not Available</font>
+       {% if user.is_authenticated %}
+       <button class="hold-button" type="button" disabled>Hold</button> {% endif %}
       {% endif %}
 
             <img class="book-img" img src="media/{{ movie.cover_image }}" </div>
@@ -85,13 +89,15 @@
             {% if m.activecopies > 0 %}
             <font size="2" class= "available" color="green">Available</font> 
             
+            {% if user.is_authenticated %}
             <form action="{% url 'catalog_index' %}" method="get" > <input type="hidden" name="hold_ismn" value={{m.ismn}}> <input type="submit" class = "hold-button" value="Hold" />
-      </form>
+      </form>{% endif %}
 
       {% else %}
-       <font size="2" class = "available" color="red">Not Available</font>
 
-       <button class="hold-button" type="button" disabled>Hold</button> 
+       <font size="2" class = "available" color="red">Not Available</font>
+       {% if user.is_authenticated %}
+       <button class="hold-button" type="button" disabled>Hold</button> {% endif %}
       {% endif %}
 
             <img class="book-img" img src="media/{{ m.cover_image }}" </div>
