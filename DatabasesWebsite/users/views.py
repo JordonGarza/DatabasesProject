@@ -81,11 +81,28 @@ def pay_Fine(request):
             return render(request, "payFine.html", context=context)
         
 def report(request):
+        checkOutCount = Checkout.objects.count()
+        holdsCount = Holds.objects.count()
+        currentCheckCount = Currentcheckedout.objects.count()
+        currentHoldsCount = Currentholds.objects.count()
+        studentAmount = UsersCustomuserGroups.objects.filter(group_id = 3).count()
+        adminAmount = UsersCustomuserGroups.objects.filter(group_id = 1).count()
+        facultyAmount = UsersCustomuserGroups.objects.filter(group_id = 2).count()
+        librarianAmount = UsersCustomuserGroups.objects.filter(group_id = 4).count()
         if request.method == "POST":
              user_id = request.user.id
         else:
-
-             return render(request, "reports.html")
+            
+            context = { 'checkOutCount': checkOutCount,
+                        'holdsCount': holdsCount,
+                        'currentCheckCount': currentCheckCount,
+                        'currentHoldsCount': currentHoldsCount,
+                        'studentAmount': studentAmount,
+                        'adminAmount': adminAmount,
+                        'facultyAmount': facultyAmount,
+                        'librarianAmount': librarianAmount,
+                      }
+            return render(request, "reports.html", context=context)
 
 #See link for use of login_required decorator
 # https://docs.djangoproject.com/en/2.2/topics/auth/default/    
