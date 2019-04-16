@@ -68,6 +68,27 @@ class Copiesborrowed(models.Model):
     class Meta:
         managed = False
         db_table = 'CopiesBorrowed'
+        
+class Currentcheckedout(models.Model):
+    userid = models.ForeignKey('UsersCustomuser', models.DO_NOTHING, db_column='userID')  # Field name made lowercase.
+    itemid = models.ForeignKey('Item', models.DO_NOTHING, db_column='itemID', primary_key=True)  # Field name made lowercase.
+    checkoutdate = models.DateField(db_column='CheckOutDate')  # Field name made lowercase.
+    duedate = models.DateField(db_column='DueDate')  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'CurrentCheckedOut'
+
+
+class Currentholds(models.Model):
+    itemid = models.ForeignKey('Item', models.DO_NOTHING, db_column='itemID', primary_key=True)  # Field name made lowercase.
+    userid = models.ForeignKey('UsersCustomuser', models.DO_NOTHING, db_column='userID')  # Field name made lowercase.
+    holddate = models.DateField(db_column='HoldDate')  # Field name made lowercase.
+    helduntildate = models.DateField(db_column='HeldUntilDate')  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'CurrentHolds'
 
 
 class Finetransactions(models.Model):
