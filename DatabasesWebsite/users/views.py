@@ -56,6 +56,10 @@ def add_checkIn(request):
             return render(request, "checkIn.html", {'form': form})
 
 def pay_Fine(request):
+
+        user_id = request.user.id
+        finesObj = Finesrecord.objects.get(userid= user_id)
+        theFine = getattr(finesObj, 'amount')
         if request.method == "POST":
             form = pay(request.POST)
             if form.is_valid():
@@ -71,9 +75,10 @@ def pay_Fine(request):
         else:
  
             form = pay()
- 
-            return render(request, "payFine.html", {'form': form})
-
+            context = { 'fine': theFine,
+                        'form': form
+                      }
+            return render(request, "payFine.html", context=context)
 
 #See link for use of login_required decorator
 # https://docs.djangoproject.com/en/2.2/topics/auth/default/    
