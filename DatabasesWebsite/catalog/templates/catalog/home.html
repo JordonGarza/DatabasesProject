@@ -17,20 +17,23 @@
               <a class="mr-2" >{{ book.author }}</a>
               <small class="text-muted">ISBN-13: {{ book.isbn }}</small>
             </div>
-            <h2><a class="article-title" >{{ book.title }}</a></h2>
-            <img src="media/{{ book.cover_image }}" height="150" width="100" align="middle">
+            <h3><a class="article-title" >{{ book.title }}</a></h3>
 
             {% if book.activecopies > 0 %}
-            <font size="2" color="green">Available</font>
+            <font size="2" class= "available" color="green">Available</font> 
             
-            <form action="{% url 'catalog_index' %}" method="get" > <input type="hidden" name="hold_isbn" value={{book.isbn}}> <input type="submit" value="Hold" />
-			</form>
+            <form action="{% url 'catalog_index' %}" method="get" > <input type="hidden" name="hold_isbn" value={{book.isbn}}> <input type="submit" class = "hold-button" value="Hold" />
+      </form>
 
-			{% else %}
-			 <font size="2" color="red">Not Available</font>
+      {% else %}
+       <font size="2" class = "available" color="red">Not Available</font>
 
-			 <button type="button" disabled>Hold</button> 
-			{% endif %}
+       <button class="hold-button" type="button" disabled>Hold</button> 
+      {% endif %}
+
+            <img class="book-img" img src="media/{{ book.cover_image }}" </div>
+
+        
 
           </div>
 		</article>
@@ -40,59 +43,65 @@
 
 
 	{% for movie in movies %}
-		<article class="media content-section">
+    <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
               <a class="mr-2" >{{ movie.director }}</a>
               <small class="text-muted">ISAN: {{ movie.isan }}</small>
             </div>
-            <h2><a class="article-title" >{{ movie.title }}</a></h2>
-            <img src="media/{{ movie.cover_image }}" height="150" width="100" align="middle">
+            <h3><a class="article-title" >{{ movie.title }}</a></h3>
 
             {% if movie.activecopies > 0 %}
-            <font size="2" color="green">Available</font>
+            <font size="2" class= "available" color="green">Available</font> 
             
-            <form action="{% url 'catalog_index' %}" method="get" > <input type="hidden" name="hold_isan" value={{movie.isan}}> <input type="submit" value="Hold" />
-			</form>
+            <form action="{% url 'catalog_index' %}" method="get" > <input type="hidden" name="hold_isan" value={{movie.isan}}> <input type="submit" class = "hold-button" value="Hold" />
+      </form>
 
-			{% else %}
-			 <font size="2" color="red">Not Available</font>
+      {% else %}
+       <font size="2" class = "available" color="red">Not Available</font>
 
-			 <button type="button" disabled>Hold</button> 
-			{% endif %}
+       <button class="hold-button" type="button" disabled>Hold</button> 
+      {% endif %}
+
+            <img class="book-img" img src="media/{{ movie.cover_image }}" </div>
+
+        
 
           </div>
-		</article>
-		
-	{% endfor %}
+    </article>
+    
+  {% endfor %}
 
 
 	{% for m in music %}
-		<article class="media content-section">
+    <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
-              <a class="mr-2" >{{ m.composer }}</a>
+              <a class="mr-2" >{{ music.composer }}</a>
               <small class="text-muted">ISMN: {{ m.ismn }}</small>
             </div>
-            <h2><a class="article-title" >{{ m.title }}</a></h2>
-            <img src="media/{{ m.cover_image }}" height="150" width="100" align="middle">
+            <h3><a class="article-title" >{{ m.title }}</a></h3>
 
             {% if m.activecopies > 0 %}
-            <font size="2" color="green">Available</font>
+            <font size="2" class= "available" color="green">Available</font> 
             
-            <form action="{% url 'catalog_index' %}" method="get" > <input type="hidden" name="hold_ismn" value={{m.ismn}}> <input type="submit" value="Hold" />
-			</form>
+            <form action="{% url 'catalog_index' %}" method="get" > <input type="hidden" name="hold_ismn" value={{m.ismn}}> <input type="submit" class = "hold-button" value="Hold" />
+      </form>
 
-			{% else %}
-			 <font size="2" color="red">Not Available</font>
+      {% else %}
+       <font size="2" class = "available" color="red">Not Available</font>
 
-			 <button type="button" disabled>Hold</button> 
-			{% endif %}
+       <button class="hold-button" type="button" disabled>Hold</button> 
+      {% endif %}
+
+            <img class="book-img" img src="media/{{ m.cover_image }}" </div>
+
+        
 
           </div>
-		</article>
-		
-	{% endfor %}
+    </article>
+    
+  {% endfor %}
 
 {% endblock content %}
 

@@ -2,6 +2,7 @@ body {
   background: #fafafa;
   color: #333333;
   margin-top: 10px;
+
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -63,9 +64,20 @@ a.article-title:hover {
 }
 
 .book-img {
-  height: 150px;
-  width: 100px;
-  margin-right: 16px;
+  height: 110px;
+  width: 80px;
+  
+}
+
+.available {
+  float:right;
+  clear:both;
+}
+
+
+.hold-button {
+  float:right;
+  clear:both;
 }
 
 .article-metadata {
@@ -97,5 +109,13 @@ a.article-title:hover {
 }
 
 .navbar {
-  margin-top: 70px;
-  margin-bottom: 40px;}
+ }
+  
+.form {
+  position: absolute;
+  top: 120px;
+}  
+
+.account-box {
+  margin-top: 80px;
+}
