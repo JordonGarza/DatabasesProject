@@ -17,7 +17,7 @@ class Book(models.Model):
     genre = models.CharField(db_column='Genre', max_length=8, blank=True, null=True)  # Field name made lowercase.
     copies = models.IntegerField(db_column='Copies')  # Field name made lowercase.
     activecopies = models.IntegerField(db_column='ActiveCopies')  # Field name made lowercase.
-    cover_image = models.ImageField(db_column='CoverImage', blank = True, null =True, default="covers/book_default.png", upload_to="covers/")
+    cover_image = models.ImageField(db_column='CoverImage', blank = True, null =True, default="covers/book_default.png", upload_to="")
 
     class Meta:
         managed = False
@@ -68,6 +68,27 @@ class Copiesborrowed(models.Model):
     class Meta:
         managed = False
         db_table = 'CopiesBorrowed'
+
+class Currentcheckedout(models.Model):
+    userid = models.ForeignKey('UsersCustomuser', models.DO_NOTHING, db_column='userID')  # Field name made lowercase.
+    itemid = models.ForeignKey('Item', models.DO_NOTHING, db_column='itemID', primary_key=True)  # Field name made lowercase.
+    checkoutdate = models.DateField(db_column='CheckOutDate')  # Field name made lowercase.
+    duedate = models.DateField(db_column='DueDate')  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'CurrentCheckedOut'
+
+
+class Currentholds(models.Model):
+    itemid = models.ForeignKey('Item', models.DO_NOTHING, db_column='itemID', primary_key=True)  # Field name made lowercase.
+    userid = models.ForeignKey('UsersCustomuser', models.DO_NOTHING, db_column='userID')  # Field name made lowercase.
+    holddate = models.DateField(db_column='HoldDate')  # Field name made lowercase.
+    helduntildate = models.DateField(db_column='HeldUntilDate')  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'CurrentHolds'
 
 
 class Finetransactions(models.Model):
@@ -130,7 +151,7 @@ class Movie(models.Model):
     genre = models.CharField(db_column='Genre', max_length=15, blank=True, null=True)  # Field name made lowercase.
     copies = models.IntegerField(db_column='Copies')  # Field name made lowercase.
     activecopies = models.IntegerField(db_column='ActiveCopies')  # Field name made lowercase.
-    cover_image = models.ImageField(db_column='CoverImage', blank = True, default="covers/movie_default.png", null =True, upload_to="covers/")
+    cover_image = models.ImageField(db_column='CoverImage', blank = True, default="covers/movie_default.png", null =True, upload_to="")
 
     class Meta:
         managed = False
@@ -176,7 +197,7 @@ class Sheetmusic(models.Model):
     genre = models.CharField(db_column='Genre', max_length=15, blank=True, null=True)  # Field name made lowercase.
     copies = models.IntegerField(db_column='Copies')  # Field name made lowercase.
     activecopies = models.IntegerField(db_column='ActiveCopies')  # Field name made lowercase.
-    cover_image = models.ImageField(db_column='CoverImage', blank = True, null =True, default="covers/music_default.png", upload_to="covers/")
+    cover_image = models.ImageField(db_column='CoverImage', blank = True, null =True, default="covers/music_default.png", upload_to="")
 
     class Meta:
         managed = False

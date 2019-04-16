@@ -33,7 +33,7 @@
        <button class="hold-button" type="button" disabled>Hold</button> {% endif %}
       {% endif %}
 
-            <img class="book-img" img src="media/{{ book.cover_image }}" </div>
+            <img class="book-img" img src="{{ book.cover_image.url }}" </div>
 
         
 
@@ -67,7 +67,7 @@
        <button class="hold-button" type="button" disabled>Hold</button> {% endif %}
       {% endif %}
 
-            <img class="book-img" img src="media/{{ movie.cover_image }}" </div>
+            <img class="book-img" img src="{{ movie.cover_image.url }}" </div>
 
         
 
@@ -100,7 +100,7 @@
        <button class="hold-button" type="button" disabled>Hold</button> {% endif %}
       {% endif %}
 
-            <img class="book-img" img src="media/{{ m.cover_image }}" </div>
+            <img class="book-img" img src="{{ m.cover_image.url }}" </div>
 
         
 

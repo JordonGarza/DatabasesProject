@@ -83,6 +83,8 @@ def seeAccount(request):
     user_id = request.user.id
     holds = Holds.objects.filter(userid=user_id) 
     checkouts = Checkout.objects.filter(userid=user_id)
+    for h in holds:
+        print((holds.itemid).itemid)
     
 
 
