@@ -2,30 +2,50 @@
 {% block content %}
 
 <div class = "account-box">
-<div class = "content-section">
 <h2>Checked Out</h2>
 	
-{% for c in checkouts %}
-		<article class="media content-section">
+{% for b in checkout_books %}
+    <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
-              <a class="mr-2" >{{ c.itemid }}</a>
-              <small class="text-muted">ISBN-13: </small>
+              <a class="mr-2" >{{ b.author }}</a>
+              <small class="text-muted">ISBN-13: {{ b.isbn }}</small>
             </div>
-            <h3><a class="article-title" >   </a></h3>
-
+            <h3><a class="article-title" >{{ b.title }}</a></h3>
+            <img class="book-img" img src="{{ b.cover.url }}" </div>
+    </article>
 {% endfor %}
 
+{% for m in checkout_movies %}
+    <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" >{{ m.director }}</a>
+              <small class="text-muted">ISAN: {{ m.isan }}</small>
+            </div>
+            <h3><a class="article-title" >{{ m.title }}</a></h3>
+            <img class="book-img" img src="{{ m.cover.url }}" </div>
+    </article>
+{% endfor %}
 
+{% for m in checkout_music %}
+    <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" >{{ m.composer }}</a>
+              <small class="text-muted">ISMN: {{ m.ismn }}</small>
+            </div>
+            <h3><a class="article-title" >{{ m.title }}</a></h3>
+            <img class="book-img" img src="{{ m.cover.url }}" </div>
+    </article>
+{% endfor %}
 
-
-</div>
 </div>
 
 <div class = "account-box">
 <h2>Holds</h2>
   
-{% for b in books %}
+{% for b in hold_books %}
 		<article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
@@ -37,12 +57,24 @@
     </article>
 {% endfor %}
 
-{% for m in movies %}
+{% for m in hold_movies %}
     <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
               <a class="mr-2" >{{ m.director }}</a>
               <small class="text-muted">ISAN: {{ m.isan }}</small>
+            </div>
+            <h3><a class="article-title" >{{ m.title }}</a></h3>
+            <img class="book-img" img src="{{ m.cover.url }}" </div>
+    </article>
+{% endfor %}
+
+{% for m in hold_music %}
+    <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" >{{ m.composer }}</a>
+              <small class="text-muted">ISMN: {{ m.ismn }}</small>
             </div>
             <h3><a class="article-title" >{{ m.title }}</a></h3>
             <img class="book-img" img src="{{ m.cover.url }}" </div>

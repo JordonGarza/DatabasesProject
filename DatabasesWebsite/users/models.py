@@ -178,7 +178,7 @@ class Movie(models.Model):
         managed = False
         db_table = 'Movie'
     def __str__(self):
-        return self.title
+        return self.isan
 
 class Moviecopy(models.Model):
     itemid = models.ForeignKey(Item, models.DO_NOTHING, db_column='ItemID', primary_key=True)  # Field name made lowercase.
@@ -225,7 +225,7 @@ class Sheetmusic(models.Model):
         db_table = 'SheetMusic'
        
     def __str__(self):
-        return self.title
+        return self.ismn
 
 
 class User(models.Model):
