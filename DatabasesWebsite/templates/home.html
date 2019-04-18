@@ -38,7 +38,7 @@
   {% if request.user|has_group:"STUDENT" %}
 <div class = "first">
 	<p> User belongs to Student </p>
-	<p><a href="{ % url'pay_Fine'%}">Pay Fines</a></p>
+	<p><a href="{% url 'pay_Fine' %}">Pay Fines</a></p>
     </div>
   {% endif %}
 <div class = "first">
