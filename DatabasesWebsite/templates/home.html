@@ -5,37 +5,47 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+<div class = "first">
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
-  
+    </div>
+
   {% if request.user|has_group:"ADMIN" %}
+<div class = "first">
 	<p> User belongs to Admin </p>
 	<a href="{% url 'admin:index' %}">Admin Site</a>
-	<p><a href="{% url 'report' %}">User and Item Report</a></p>
-	<p><a href="{% url 'financeReport' %}">Financial Report</a></p>
+</div>
   {% endif %}
-  
+
   {% if request.user|has_group:"LIBRARIAN" %}
+<div class = "first">
 	<p> User belongs to Librarian </p>
 	<a href="{% url 'add_model' %}">Check-Out Item</a>
 	<a href="{% url 'add_checkIn' %}">Check-In Item</a>
 	<p><a href="{% url 'pay_Fine' %}">Pay Fines</a></p>
+     </div>
   {% endif %}
-  
+
   {% if request.user|has_group:"FACULTY" %}
+<div class = "first">
 	<p> User belongs to Faculty </p>
 	<p><a href="{% url 'pay_Fine' %}">Pay Fines</a></p>
+    </div>
   {% endif %}
-  
+
   {% if request.user|has_group:"STUDENT" %}
+<div class = "first">
 	<p> User belongs to Student </p>
-	<p><a href="{% url 'pay_Fine' %}">Pay Fines</a></p>
+	<p><a href="{ % url'pay_Fine'%}">Pay Fines</a></p>
+    </div>
   {% endif %}
+<div class = "first">
    <p><a href="{% url 'logout' %}">logout</a></p>
-   
+
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">login</a> |
   <a href="{% url 'signup' %}">signup</a>
 {% endif %}
+    </div>
 {% endblock %}

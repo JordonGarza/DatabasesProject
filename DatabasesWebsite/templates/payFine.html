@@ -5,21 +5,22 @@
 {% block title %}Check In{% endblock %}
 
 {% block content %}
+<div class="form">
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
 
- <li><strong>Current Fine:</strong> {{ fine }}</li>
-	
-	<form method="post"> 
+
+	<form method="post">
 	{% csrf_token %}
 	{{ form.as_p }}
 	<button type="submit">Pay Fine!</button>
     </form>
 
    <p><a href="{% url 'logout' %}">logout</a></p>
-   
+
 {% else %}
   <p>You are not logged in as a Librarian</p>
   <a href="{% url 'home' %}">Home</a>
+    </div>
 {% endif %}
 {% endblock %}

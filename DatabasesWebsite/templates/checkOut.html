@@ -6,26 +6,30 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+<div class="form">
   Hi {{ user.username }}!
- 
- 
+
+
   {% if request.user|has_group:"LIBRARIAN" %}
+
 	<p> User belongs to Librarian </p>
-	
-	<form method="post"> 
+
+	<form method="post">
 	{% csrf_token %}
 	{{ form.as_p }}
 	<button type="submit">Check-Out!</button>
     </form>
+    </div>
   {% else %}
 	<p>You are not logged in as a Librarian</p>
     <a href="{% url 'home' %}">Home</a>
   {% endif %}
-   <p><a href="{% url 'home' %}">Home</a></p>
+
    <p><a href="{% url 'logout' %}">logout</a></p>
-   
+
 {% else %}
   <p>You are not logged in as a Librarian</p>
   <a href="{% url 'home' %}">Home</a>
+
 {% endif %}
 {% endblock %}
