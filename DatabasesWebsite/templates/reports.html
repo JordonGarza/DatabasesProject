@@ -5,6 +5,7 @@
 {% block title %}Reports{% endblock %}
 
 {% block content %}
+<div class="form">
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
   
@@ -17,6 +18,7 @@
    <li><strong>Amount of Faculty:</strong> {{ facultyAmount }}</li>
    <li><strong>Amount of Librarian:</strong> {{ librarianAmount }}</li>
    <li><strong>Amount of Admins:</strong> {{ adminAmount }}</li>
+    </div>
   
   
   

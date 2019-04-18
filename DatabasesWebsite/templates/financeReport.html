@@ -5,6 +5,7 @@
 {% block title %}Reports{% endblock %}
 
 {% block content %}
+<div class="form">
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
   
@@ -34,4 +35,5 @@
   <a href="{% url 'login' %}">login</a> |
   <a href="{% url 'signup' %}">signup</a>
 {% endif %}
+</div>
 {% endblock %}
