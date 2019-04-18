@@ -134,14 +134,23 @@ AUTH_USER_MODEL = 'users.CustomUser'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
+AWS_STATIC_LOCATION = 'static'
 AWS_ACCESS_KEY_ID = 'AKIAZDOKXDPJ4CSCBAHE' 
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_SECRET_ACCESS_KEY = '9wQVl4dpq2wqqPjNmlq1EbrwvfdOzddFUO328u+c'
 AWS_STORAGE_BUCKET_NAME = 'django-library-files1'
 MEDIA_URL = 's3-us-west-2.amazonaws.com/' + AWS_STORAGE_BUCKET_NAME + '/'
-STATIC_URL = '/static/'
+STATIC_URL = 's3-us-west-2.amazonaws.com/' + AWS_STORAGE_BUCKET_NAME + '/catalog/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = 'https://s3-us-west-2.amazonaws.com/' + AWS_STORAGE_BUCKET_NAME + '/static/'
+
+STATICFILES_FINDERS = (
+'django.contrib.staticfiles.finders.FileSystemFinder',
+'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 AWS_S3_CUSTOM_DOMAIN = 's3-us-west-2.amazonaws.com/' + AWS_STORAGE_BUCKET_NAME 
-
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
