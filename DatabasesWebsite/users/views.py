@@ -13,6 +13,7 @@ from .forms import pay
 from .models import CustomUser
 from .models import UsersCustomuser
 from .models import Finetransactions
+from .models import Finesrecord
 from .models import Currentholds
 from .models import Currentcheckedout
 from .models import Book
