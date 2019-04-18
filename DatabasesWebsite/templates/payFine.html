@@ -9,7 +9,8 @@
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
 
-
+<li><strong>Current Fine:</strong> {{ fine }}</li>
+	
 	<form method="post">
 	{% csrf_token %}
 	{{ form.as_p }}
