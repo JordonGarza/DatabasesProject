@@ -4,6 +4,7 @@ from django.views import generic
 from django import forms
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from decimal import *
 
 from .forms import CustomUserCreationForm
 from .forms import SignOut
@@ -21,6 +22,13 @@ from .models import Bookcopy
 from .models import Moviecopy
 from .models import Musiccopy
 from .models import Checkout
+
+from .models import Holds
+from .models import Checkout
+from .models import Currentcheckedout
+from .models import Currentholds
+from .models import UsersCustomuserGroups
+
 from django.views.generic.edit import FormView
 import datetime
 
@@ -108,6 +116,38 @@ def report(request):
                         'librarianAmount': librarianAmount,
                       }
             return render(request, "reports.html", context=context)
+        
+def financeReport(request):
+        checkOutCount = Checkout.objects.count()
+        holdsCount = Holds.objects.count()
+        currentCheckCount = Currentcheckedout.objects.count()
+        currentHoldsCount = Currentholds.objects.count()
+        charges = Finetransactions.objects.filter(transtype = 'CHARGE').count()
+        payments = Finetransactions.objects.filter(transtype = 'PAYMENT').count()
+        chargesObject = Finetransactions.objects.filter(transtype = 'PAYMENT')
+        
+        moneyEarned = Decimal(0.00);
+        payment = Decimal(0.00);
+        for o in chargesObject:
+            payment = getattr(o, 'amount')
+            moneyEarned = moneyEarned + payment
+
+
+
+        
+        if request.method == "POST":
+             user_id = request.user.id
+        else:
+            
+            context = { 'checkOutCount': checkOutCount,
+                        'holdsCount': holdsCount,
+                        'currentCheckCount': currentCheckCount,
+                        'currentHoldsCount': currentHoldsCount,
+                        'charges': charges,
+                        'payments': payments,
+                        'moneyEarned': moneyEarned,
+                      }
+            return render(request, "financeReport.html", context=context)
 
 #See link for use of login_required decorator
 # https://docs.djangoproject.com/en/2.2/topics/auth/default/    

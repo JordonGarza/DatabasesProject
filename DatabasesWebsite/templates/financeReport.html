@@ -9,15 +9,13 @@
   Hi {{ user.username }}!
   
   {% if request.user|has_group:"ADMIN" %}
-   
-   <li><strong>Items Currently Checked Out:</strong> {{ currentCheckCount }}</li>
-   <li><strong>Items Currently Checked Out:</strong> {{ currentCheckCount }}</li>
-   <li><strong>Items Currently Held:</strong> {{ currentHoldsCount }}</li>
-   <li><strong>Amount of Students:</strong> {{ studentAmount }}</li>
-   <li><strong>Amount of Faculty:</strong> {{ facultyAmount }}</li>
-   <li><strong>Amount of Librarian:</strong> {{ librarianAmount }}</li>
-   <li><strong>Amount of Admins:</strong> {{ adminAmount }}</li>
   
+   <li><strong>Total Times Items Have Been Checked Out:</strong> {{ checkOutCount }}</li>
+   <li><strong>Total Times Items Have Been Checked Out:</strong> {{ checkOutCount }}</li>
+   <li><strong>Total Times Items Have Been Held:</strong> {{ holdsCount }}</li>
+   <li><strong>Amount of Charges:</strong> {{ charges }}</li>
+   <li><strong>Amount of Payments:</strong> {{ payments }}</li>
+   <li><strong>Money Earned Through Fees: $</strong> {{ moneyEarned }}</li>
   
   
     <p><a href="{% url 'home' %}">Home</a></p>
