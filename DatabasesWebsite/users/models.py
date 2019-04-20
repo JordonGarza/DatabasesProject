@@ -156,7 +156,8 @@ class Item(models.Model):
     class Meta:
         managed = False
         db_table = 'Item'
-
+    def __str__(self):
+        return str(self.itemid)
 
 class Logincredentials(models.Model):
     userid = models.ForeignKey('UsersCustomuser', models.DO_NOTHING, db_column='userID', unique=True)  # Field name made lowercase.
