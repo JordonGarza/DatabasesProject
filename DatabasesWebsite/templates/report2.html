@@ -45,22 +45,23 @@ table#t01 {
 
 <table style="width:100%">
   <tr>
-      <th>UserID</th>
+      <th>Transaction ID</th>
+	    <th>User ID</th>
       <th>Transaction Type</th>
       <th>Transaction Date</th>
       <th>Amount</th>
       <th>Checkout ID</th>
-      <th>Transaction ID</th>
   </tr>
   <tr>
       {% for trans in allTrans %}
         <tr class="{% cycle 'row1' 'row2' %}">
-    <td>{{trans.userid}}</td>
+	  <td>{{trans.transactionid}}</td>
+	  <td>{{trans.userid}}</td>
     <td>{{trans.transtype}}</td>
     <td>{{trans.transactiondate}}</td>
     <td>${{trans.amount}}</td>
     <td>{{trans.checkoutid}}</td>
-    <td>{{trans.transactionid}}</td>
+	
     </tr>
     {% endfor %}
 </table>
