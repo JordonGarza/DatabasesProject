@@ -8,6 +8,7 @@
 * Pillow (python module)
 * django-storages
 * boto3
+* numpy
 
 ### Linux (Ubuntu)
 Set up virtual enviroment:
@@ -26,6 +27,7 @@ pip install mysqlclient
 pip install Pillow
 pip install boto3
 pip install django-storages
+pip install numpy
 ```
 
 ## Download
