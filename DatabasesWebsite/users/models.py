@@ -59,6 +59,9 @@ class Checkout(models.Model):
     class Meta:
         managed = False
         db_table = 'CheckOut'
+      
+    def __str__(self):
+        return str(self.transactionid)
 
 
 class Copiesborrowed(models.Model):
@@ -331,6 +334,9 @@ class UsersCustomuser(models.Model):
     class Meta:
         managed = False
         db_table = 'users_customuser'
+    def __str__(self):
+        return str(self.id)
+
 
 
 class UsersCustomuserGroups(models.Model):
