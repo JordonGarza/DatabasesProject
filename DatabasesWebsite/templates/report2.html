@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% load auth_extras %}
+
+{% block title %}Reports{% endblock %}
+
+
+{% block content %}
+<div class="form">
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+    <br><br>
+
+  {% if request.user|has_group:"ADMIN" %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+Total amount of fines charged: ${{moneyCharged}} <br>
+Total amount of fines paid: ${{moneyEarned}} <br>
+Outstanding fee amount: ${{outstandingAmount}}<br>
+<br>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 7px;
+  text-align: left;
+}
+table#t01 {
+  width: 100%;
+  background-color: #f1f1c1;
+}
+</style>
+</head>
+<body>
+
+<h1>Fine transaction history</h1>
+
+<table style="width:100%">
+  <tr>
+      <th>UserID</th>
+      <th>Transaction Type</th>
+      <th>Transaction Date</th>
+      <th>Amount</th>
+      <th>Checkout ID</th>
+      <th>Transaction ID</th>
+  </tr>
+  <tr>
+      {% for trans in allTrans %}
+        <tr class="{% cycle 'row1' 'row2' %}">
+    <td>{{trans.userid}}</td>
+    <td>{{trans.transtype}}</td>
+    <td>{{trans.transactiondate}}</td>
+    <td>${{trans.amount}}</td>
+    <td>{{trans.checkoutid}}</td>
+    <td>{{trans.transactionid}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
+    {% endif %}
+    {% endif %}
+    {% endblock %}
+
+</div>
+</div>
