@@ -6,6 +6,7 @@ from django import forms
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from decimal import *
+import numpy as np
 
 from .forms import CustomUserCreationForm
 from .forms import SignOut
@@ -147,6 +148,41 @@ def financeReport(request):
                         'moneyEarned': moneyEarned,
                       }
             return render(request, "financeReport.html", context=context)
+        
+def report1(request):
+    CheckObject = Checkout.objects.all()
+    theCount = Checkout.objects.count()
+
+    arrayForUser = np.zeros([theCount,], dtype=int)
+    arrayForItem = np.zeros([theCount,], dtype=int)
+    spot = 0
+    for o in CheckObject:
+        userID = getattr(o, 'userid')
+        theItemID = getattr(o, 'itemid')
+
+
+        
+        arrayForUser[spot] = userID.id
+        arrayForItem[spot] = theItemID.itemid
+        spot = spot + 1
+
+    (valuesforUser, countsforUser) = np.unique(arrayForUser, return_counts=True)
+    ind = np.argmax(countsforUser)
+    mostActiveUser = valuesforUser[ind]
+
+    (valuesforItem, countsforItem) = np.unique(arrayForItem, return_counts=True)
+    ind = np.argmax(countsforItem)
+    mostCheckedBook = valuesforItem[ind]
+    
+
+    context = {
+                'allCheckOut': Checkout.objects.all(),
+                'mostActiveUser' : mostActiveUser,
+                'mostCheckedBook' : mostCheckedBook
+               }
+
+
+    return render(request, "report1.html", context = context)
 
 def report2(request):
     paymentObject = Finetransactions.objects.filter(transtype='PAYMENT')
