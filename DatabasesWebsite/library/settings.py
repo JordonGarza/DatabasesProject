@@ -26,7 +26,7 @@ SECRET_KEY = 'uin4m2v$fkww-wa(-bqalf7j65!+w)mi=e+nqywgr!p)kht*=i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['libraryAppSite.dqjbxk2jk3.us-west-2.elasticbeanstalk.com','127.0.0.1']
+ALLOWED_HOSTS = ['libraryappsite.dqjbxk2jk3.us-west-2.elasticbeanstalk.com','127.0.0.1']
 
 SILENCED_SYSTEM_CHECKS = ["fields.W342"]
 
