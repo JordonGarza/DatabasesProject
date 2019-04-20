@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% load auth_extras %}
+
+{% block title %}Reports{% endblock %}
+
+
+{% block content %}
+<div class="form">
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+    <br><br>
+
+  {% if request.user|has_group:"ADMIN" %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+User With Most Check Outs: {{mostActiveUser}} <br>
+Most Checked Out Item: {{mostCheckedBook}} <br>
+<br>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 7px;
+  text-align: left;
+}
+table#t01 {
+  width: 100%;
+  background-color: #f1f1c1;
+}
+</style>
+</head>
+<body>
+
+<h1>Check Out Transaction History</h1>
+
+<table style="width:100%">
+  <tr>
+      <th>Transaction ID</th>
+	  <th>User ID</th>
+      <th>Item ID</th>
+      <th>Check Out Date</th>
+  </tr>
+  <tr>
+      {% for check in allCheckOut %}
+        <tr class="{% cycle 'row1' 'row2' %}">
+	<td>{{check.transactionid}}</td>
+	<td>{{check.userid}}</td>
+    <td>{{check.itemid}}</td>
+    <td>{{check.checkoutdate}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
+    {% endif %}
+    {% endif %}
+    {% endblock %}
+
+</div>
+</div>
