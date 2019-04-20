@@ -1,4 +1,5 @@
 # users/views.py
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views import generic
 from django import forms
@@ -132,9 +133,6 @@ def financeReport(request):
         for o in chargesObject:
             payment = getattr(o, 'amount')
             moneyEarned = moneyEarned + payment
-
-
-
         
         if request.method == "POST":
              user_id = request.user.id
@@ -149,6 +147,41 @@ def financeReport(request):
                         'moneyEarned': moneyEarned,
                       }
             return render(request, "financeReport.html", context=context)
+
+def report2(request):
+    paymentObject = Finetransactions.objects.filter(transtype='PAYMENT')
+    chargesObject = Finetransactions.objects.filter(transtype='CHARGE')
+
+    moneyEarned = Decimal(0.00);
+    payment = Decimal(0.00);
+    moneyCharged = Decimal(0.00);
+    charge = Decimal(0.00);
+
+    for o in paymentObject:
+        payment = getattr(o, 'amount')
+        moneyEarned = moneyEarned + payment
+
+    for i in chargesObject:
+        charge = getattr(i, 'amount')
+        moneyCharged = moneyCharged + charge
+
+
+
+
+    outstandingAmount = moneyCharged - moneyEarned;
+    context = {
+                'payment': payment,
+                'moneyEarned': moneyEarned,
+                'charge': charge,
+                'moneyCharged': moneyCharged,
+                'outstandingAmount': outstandingAmount,
+                'allTrans': Finetransactions.objects.all(),
+               }
+
+
+    return render(request, "report2.html", context = context)
+
+
 
 #See link for use of login_required decorator
 # https://docs.djangoproject.com/en/2.2/topics/auth/default/    
