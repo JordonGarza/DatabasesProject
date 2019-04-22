@@ -26,7 +26,7 @@ SECRET_KEY = 'uin4m2v$fkww-wa(-bqalf7j65!+w)mi=e+nqywgr!p)kht*=i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['libraryappsite.dqjbxk2jk3.us-west-2.elasticbeanstalk.com','127.0.0.1']
+ALLOWED_HOSTS = ['libraryappsite.dqjbxk2jk3.us-west-2.elasticbeanstalk.com','127.0.0.1', 'libraryProject.us-east-2.elasticbeanstalk.com']
 
 SILENCED_SYSTEM_CHECKS = ["fields.W342"]
 
@@ -138,10 +138,10 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 AWS_STATIC_LOCATION = 'static'
-AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'django-library-files1'
-MEDIA_URL = 's3-us-west-2.amazonaws.com/' + AWS_STORAGE_BUCKET_NAME + '/'
+MEDIA_URL = 's3-us-west-2.amazonaws.com/' + AWS_STORAGE_BUCKET_NAME + '/covers/'
 STATIC_URL = 's3-us-west-2.amazonaws.com/' + AWS_STORAGE_BUCKET_NAME + '/catalog/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = 'https://s3-us-west-2.amazonaws.com/' + AWS_STORAGE_BUCKET_NAME + '/static/'
