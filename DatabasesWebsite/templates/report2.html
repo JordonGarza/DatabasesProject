@@ -43,20 +43,25 @@ table#t01 {
 
 <h1>Fine transaction history</h1>
 
+<form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+</form>
+
 <table style="width:100%">
   <tr>
       <th>Transaction ID</th>
-	    <th>User ID</th>
+      <th>User ID</th>
       <th>Transaction Type</th>
       <th>Transaction Date</th>
       <th>Amount</th>
       <th>Checkout ID</th>
   </tr>
   <tr>
-      {% for trans in allTrans %}
+      {% for trans in filter.qs %}
         <tr class="{% cycle 'row1' 'row2' %}">
-	  <td>{{trans.transactionid}}</td>
-	  <td>{{trans.userid}}</td>
+    <td>{{trans.transactionid}}</td>
+    <td>{{trans.userid}}</td>
     <td>{{trans.transtype}}</td>
     <td>{{trans.transactiondate}}</td>
     <td>${{trans.amount}}</td>
@@ -64,6 +69,17 @@ table#t01 {
 	
     </tr>
     {% endfor %}
+</table>
+
+</body>
+</html>
+    {% endif %}
+    {% endif %}
+    {% endblock %}
+
+</div>
+</div>
+
 </table>
 
 </body>
