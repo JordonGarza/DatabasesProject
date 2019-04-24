@@ -7,6 +7,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from decimal import *
 import numpy as np
+from .filters import CheckoutFilter
+from .filters import FinesFilter
 
 from .forms import CustomUserCreationForm
 from .forms import SignOut
@@ -96,61 +98,9 @@ def pay_Fine(request):
                       }
             return render(request, "payFine.html", context=context)
         
-def report(request):
-        checkOutCount = Checkout.objects.count()
-        holdsCount = Holds.objects.count()
-        currentCheckCount = Currentcheckedout.objects.count()
-        currentHoldsCount = Currentholds.objects.count()
-        studentAmount = UsersCustomuserGroups.objects.filter(group_id = 3).count()
-        adminAmount = UsersCustomuserGroups.objects.filter(group_id = 1).count()
-        facultyAmount = UsersCustomuserGroups.objects.filter(group_id = 2).count()
-        librarianAmount = UsersCustomuserGroups.objects.filter(group_id = 4).count()
-        if request.method == "POST":
-             user_id = request.user.id
-        else:
-            
-            context = { 'checkOutCount': checkOutCount,
-                        'holdsCount': holdsCount,
-                        'currentCheckCount': currentCheckCount,
-                        'currentHoldsCount': currentHoldsCount,
-                        'studentAmount': studentAmount,
-                        'adminAmount': adminAmount,
-                        'facultyAmount': facultyAmount,
-                        'librarianAmount': librarianAmount,
-                      }
-            return render(request, "reports.html", context=context)
-        
-def financeReport(request):
-        checkOutCount = Checkout.objects.count()
-        holdsCount = Holds.objects.count()
-        currentCheckCount = Currentcheckedout.objects.count()
-        currentHoldsCount = Currentholds.objects.count()
-        charges = Finetransactions.objects.filter(transtype = 'CHARGE').count()
-        payments = Finetransactions.objects.filter(transtype = 'PAYMENT').count()
-        chargesObject = Finetransactions.objects.filter(transtype = 'PAYMENT')
-        
-        moneyEarned = Decimal(0.00);
-        payment = Decimal(0.00);
-        for o in chargesObject:
-            payment = getattr(o, 'amount')
-            moneyEarned = moneyEarned + payment
-        
-        if request.method == "POST":
-             user_id = request.user.id
-        else:
-            
-            context = { 'checkOutCount': checkOutCount,
-                        'holdsCount': holdsCount,
-                        'currentCheckCount': currentCheckCount,
-                        'currentHoldsCount': currentHoldsCount,
-                        'charges': charges,
-                        'payments': payments,
-                        'moneyEarned': moneyEarned,
-                      }
-            return render(request, "financeReport.html", context=context)
-        
 def report1(request):
     CheckObject = Checkout.objects.all()
+    checkouts = CheckoutFilter(request.GET, queryset = CheckObject)
     theCount = Checkout.objects.count()
 
     arrayForUser = np.zeros([theCount,], dtype=int)
@@ -160,8 +110,6 @@ def report1(request):
         userID = getattr(o, 'userid')
         theItemID = getattr(o, 'itemid')
 
-
-        
         arrayForUser[spot] = userID.id
         arrayForItem[spot] = theItemID.itemid
         spot = spot + 1
@@ -176,7 +124,7 @@ def report1(request):
     
 
     context = {
-                'allCheckOut': Checkout.objects.all(),
+                'filter': checkouts,
                 'mostActiveUser' : mostActiveUser,
                 'mostCheckedBook' : mostCheckedBook
                }
@@ -185,8 +133,12 @@ def report1(request):
     return render(request, "report1.html", context = context)
 
 def report2(request):
+    allTrans = Finetransactions.objects.all()
+    transactions = FinesFilter(request.GET, queryset = allTrans)
     paymentObject = Finetransactions.objects.filter(transtype='PAYMENT')
+    payment_filter = FinesFilter(request.GET, queryset = paymentObject)
     chargesObject = Finetransactions.objects.filter(transtype='CHARGE')
+    charges_filter = FinesFilter(request.GET, queryset = chargesObject)
 
     moneyEarned = Decimal(0.00);
     payment = Decimal(0.00);
@@ -211,7 +163,7 @@ def report2(request):
                 'charge': charge,
                 'moneyCharged': moneyCharged,
                 'outstandingAmount': outstandingAmount,
-                'allTrans': Finetransactions.objects.all(),
+                'filter': transactions,
                }
 
 
