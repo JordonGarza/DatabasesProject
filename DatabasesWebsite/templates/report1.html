@@ -42,18 +42,23 @@ table#t01 {
 
 <h1>Check Out Transaction History</h1>
 
+<form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+</form>
+
 <table style="width:100%">
   <tr>
       <th>Transaction ID</th>
-	  <th>User ID</th>
+      <th>User ID</th>
       <th>Item ID</th>
       <th>Check Out Date</th>
   </tr>
   <tr>
-      {% for check in allCheckOut %}
+      {% for check in filter.qs %}
         <tr class="{% cycle 'row1' 'row2' %}">
-	<td>{{check.transactionid}}</td>
-	<td>{{check.userid}}</td>
+    <td>{{check.transactionid}}</td>
+    <td>{{check.userid}}</td>
     <td>{{check.itemid}}</td>
     <td>{{check.checkoutdate}}</td>
     </tr>
@@ -68,3 +73,4 @@ table#t01 {
 
 </div>
 </div>
+
