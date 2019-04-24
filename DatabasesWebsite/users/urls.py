@@ -11,8 +11,6 @@ urlpatterns = [
     path('checkIn/', views.add_checkIn, name='add_checkIn'),
     path('PayFine/', views.pay_Fine, name='pay_Fine'),
     path('account/', views.seeAccount, name='account'),
-    path('reports/', views.report, name='report'),
-    path('financeReport/', views.financeReport, name='financeReport'),
     path('report1/', views.report1, name='report1'),
     path('report2/', views.report2, name='report2'),
 ]
