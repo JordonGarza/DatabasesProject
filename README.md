@@ -9,6 +9,7 @@
 * django-storages
 * boto3
 * numpy
+* django-filter
 
 ### Linux (Ubuntu)
 Set up virtual enviroment:
@@ -28,6 +29,7 @@ pip install Pillow
 pip install boto3
 pip install django-storages
 pip install numpy
+pip install django-filter
 ```
 
 ## Download
