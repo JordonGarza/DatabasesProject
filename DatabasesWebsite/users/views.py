@@ -136,9 +136,7 @@ def report2(request):
     allTrans = Finetransactions.objects.all()
     transactions = FinesFilter(request.GET, queryset = allTrans)
     paymentObject = Finetransactions.objects.filter(transtype='PAYMENT')
-    payment_filter = FinesFilter(request.GET, queryset = paymentObject)
     chargesObject = Finetransactions.objects.filter(transtype='CHARGE')
-    charges_filter = FinesFilter(request.GET, queryset = chargesObject)
 
     moneyEarned = Decimal(0.00);
     payment = Decimal(0.00);
